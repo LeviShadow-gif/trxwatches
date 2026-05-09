@@ -1791,9 +1791,10 @@ img {
     max-width: 100%;
 }
 
+/* ⚠️ FIX: Removed overflow:hidden from .navbar so dropdowns (cart & hamburger menu) are not clipped */
 .navbar {
     width: 100%;
-    overflow: hidden;
+    /* overflow was previously hidden – removed to show popups above video */
 }
 
 .nav-actions {
