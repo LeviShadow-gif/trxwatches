@@ -35,6 +35,8 @@
             --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --transition-fast: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --gold-star: #e8b830;
+            --gold: #c8a44e;
+            --gold-light: #d4b56a;
         }
 
         * {
@@ -47,19 +49,20 @@
             scroll-behavior: smooth;
         }
 
-        html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    position: relative;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+        }
 
         ::-webkit-scrollbar {
             width: 6px;
@@ -114,6 +117,10 @@ body {
             border-radius: 2px;
         }
 
+        .section-divider.gold {
+            background: var(--gold);
+        }
+
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -151,6 +158,7 @@ body {
             border-bottom: 1px solid var(--border-light);
             padding: 0.9rem 0;
             transition: var(--transition);
+            width: 100%;
         }
 
         .navbar.scrolled {
@@ -171,18 +179,20 @@ body {
         }
 
         .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: var(--accent);
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 0.02em;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            flex-shrink: 0;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-icon {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
         }
 
         .logo-text {
@@ -248,6 +258,7 @@ body {
             gap: 1.3rem;
             align-items: center;
             position: relative;
+            min-width: 0;
         }
 
         .nav-actions a,
@@ -372,6 +383,7 @@ body {
             pointer-events: none;
             transform: translateY(10px);
             transition: var(--transition-fast);
+            max-width: calc(100vw - 20px);
         }
 
         .cart-dropdown.active {
@@ -471,7 +483,6 @@ body {
             display: block;
         }
 
-        /* ── Hero with background video ── */
         .hero {
             position: relative;
             overflow: hidden;
@@ -479,7 +490,7 @@ body {
             display: flex;
             align-items: center;
             background: #000;
-            /* fallback */
+            width: 100%;
         }
 
         .hero-video {
@@ -511,11 +522,13 @@ body {
             justify-content: center;
             align-items: center;
             text-align: center;
+            overflow: hidden;
         }
 
         .hero-content {
             width: 100%;
             max-width: 700px;
+            overflow: hidden;
         }
 
         .hero-content h1 {
@@ -552,6 +565,8 @@ body {
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
+            overflow: hidden;
         }
 
         .btn {
@@ -570,6 +585,7 @@ body {
             border: none;
             font-family: 'Inter', sans-serif;
             white-space: nowrap;
+            max-width: 100%;
         }
 
         .btn-primary {
@@ -592,6 +608,33 @@ body {
 
         .btn-outline:hover {
             background: var(--accent);
+            color: #fff;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #fff;
+            border: 2px solid var(--gold);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-gold:hover {
+            background: #b8953a;
+            border-color: #b8953a;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--gold);
             color: #fff;
             box-shadow: var(--shadow-md);
             transform: translateY(-3px);
@@ -627,125 +670,321 @@ body {
             opacity: 0.8;
         }
 
-        /* ── Most Popular Grid ── */
-        .most-popular {
+        /* ── THE WORLD'S MOST COVETED WATCHES (SLIDER) ── */
+        .coveted-section {
             padding: 5rem 0;
+            background: #fdfdfd;
         }
 
-        .popular-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.8rem;
+        .coveted-section .section-subtitle-gold {
+            text-align: center;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
         }
 
-        .popular-card {
+        .signature-slider-wrapper {
+            position: relative;
+            margin-top: 2.5rem;
+            overflow: hidden;
+        }
+
+        .signature-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 0.8rem;
+            cursor: grab;
+            scroll-behavior: smooth;
+        }
+
+        .signature-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .signature-slider:active {
+            cursor: grabbing;
+        }
+
+        .signature-card {
+            flex: 0 0 calc(25% - 1.2rem);
+            min-width: 240px;
+            max-width: 300px;
+            background: #fff;
+            border: 1px solid var(--border);
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow-xs);
             transition: var(--transition);
-            aspect-ratio: 1 / 1;
-            position: relative;
-            background: #fafafa;
+            box-shadow: var(--shadow-xs);
+            text-align: center;
             cursor: pointer;
+            scroll-snap-align: start;
         }
 
-        .popular-card img {
+        .signature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+            border-color: transparent;
+        }
+
+        .signature-card-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signature-card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: var(--transition);
         }
 
-        .popular-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-8px);
+        .signature-card:hover .signature-card-img img {
+            transform: scale(1.06);
         }
 
-        .popular-card:hover img {
-            transform: scale(1.05);
+        .signature-card-info {
+            padding: 1.2rem 1rem;
+        }
+
+        .signature-card-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+
+        .signature-card-info .btn-sm {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .signature-card-info .btn-sm:hover {
+            background: #222;
+            box-shadow: var(--shadow-md);
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            z-index: 5;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .slider-arrow:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .slider-arrow.prev {
+            left: -8px;
+        }
+
+        .slider-arrow.next {
+            right: -8px;
         }
 
         @media (max-width: 768px) {
-            .popular-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+            .signature-card {
+                flex: 0 0 calc(50% - 0.6rem);
+                min-width: 180px;
+                max-width: none;
+            }
+
+            .signature-slider {
+                gap: 0.8rem;
+            }
+
+            .slider-arrow {
+                width: 34px;
+                height: 34px;
+                font-size: 0.8rem;
+            }
+
+            .slider-arrow.prev {
+                left: -2px;
+            }
+
+            .slider-arrow.next {
+                right: -2px;
             }
         }
 
-        @media (max-width: 400px) {
-            .popular-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 480px) {
+            .signature-card {
+                flex: 0 0 75vw;
+                min-width: auto;
+                max-width: none;
+            }
+
+            .signature-card-info {
+                padding: 0.8rem 0.6rem;
+            }
+
+            .signature-card-info h4 {
+                font-size: 0.72rem;
+            }
+
+            .signature-card-info .btn-sm {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.62rem;
             }
         }
 
-        /* ── Brands ── */
-        .brands {
+        @media (max-width: 992px) and (min-width: 769px) {
+            .signature-card {
+                flex: 0 0 calc(33.33% - 1rem);
+                min-width: 210px;
+            }
+        }
+
+        /* ── Brands New Layout (Compact) ── */
+        .brands-new {
             padding: 5rem 0;
             background: #fafafa;
         }
 
-        .brand-grid {
+        .brands-new-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.4rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.9rem;
+            margin-top: 2rem;
         }
 
-        .brand-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+        .brands-new-grid .brand-mini-card {
+            position: relative;
+            border-radius: var(--radius-sm);
             overflow: hidden;
             cursor: pointer;
             transition: var(--transition);
+            aspect-ratio: 1/1;
             box-shadow: var(--shadow-xs);
-            text-align: center;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem;
         }
 
-        .brand-card:hover {
+        .brands-new-grid .brand-mini-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-6px);
+            transform: translateY(-5px);
             border-color: transparent;
         }
 
-        .brand-card-img {
-            width: 100%;
-            aspect-ratio: 1 / 0.85;
-            background: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .brand-card-img img {
-            width: 85%;
-            height: 85%;
+        .brands-new-grid .brand-mini-card img {
+            width: 70%;
+            height: 55%;
             object-fit: contain;
             transition: var(--transition);
-            opacity: 0.9;
-            filter: brightness(1.08);
         }
 
-        .brand-card:hover .brand-card-img img {
-            transform: scale(1.08);
+        .brands-new-grid .brand-mini-card:hover img {
+            transform: scale(1.06);
         }
 
-        .brand-card-name {
-            padding: 0.9rem 0.6rem;
+        .brands-new-grid .brand-mini-card .brand-name-tag {
+            font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            color: var(--text);
-            background: #fff;
-            border-top: 1px solid var(--border-light);
+            color: var(--accent);
+            margin-top: 0.4rem;
+            text-align: center;
+            line-height: 1.2;
+            font-family: 'Inter', sans-serif;
         }
 
-        @media (max-width: 400px) {
-            .brand-grid {
+        @media (max-width: 992px) {
+            .brands-new-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.6rem;
+            }
+
+            .brands-new-grid .brand-mini-card img {
+                width: 65%;
+                height: 50%;
+            }
+
+            .brands-new-grid .brand-mini-card .brand-name-tag {
+                font-size: 0.55rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .brands-new-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .brands-new-grid .brand-mini-card {
+                aspect-ratio: 1/1.1;
+                padding: 0.4rem;
+            }
+
+            .brands-new-grid .brand-mini-card img {
+                width: 60%;
+                height: 45%;
+            }
+
+            .brands-new-grid .brand-mini-card .brand-name-tag {
+                font-size: 0.5rem;
+                letter-spacing: 0.03em;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .brands-new-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
+                gap: 0.4rem;
+            }
+
+            .brands-new-grid .brand-mini-card {
+                aspect-ratio: 1/1.05;
+            }
+
+            .brands-new-grid .brand-mini-card img {
+                width: 55%;
+                height: 42%;
             }
         }
 
@@ -820,7 +1059,7 @@ body {
 
         .product-img {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1/1;
             background: #f8f8f8;
             display: flex;
             align-items: center;
@@ -829,15 +1068,15 @@ body {
             overflow: hidden;
         }
 
-        .product-img i {
-            font-size: 5rem;
-            color: #c0c0c0;
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: var(--transition);
         }
 
-        .product-card:hover .product-img i {
-            color: #999;
-            transform: scale(1.1);
+        .product-card:hover .product-img img {
+            transform: scale(1.06);
         }
 
         .product-info {
@@ -945,15 +1184,523 @@ body {
             }
         }
 
-        /* ── Video Showcase Section ── */
+        /* ── Who We Are ── */
+        .who-we-are {
+            padding: 5rem 0;
+            background: #fff;
+        }
+
+        .who-we-are .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            background: #000;
+            margin-bottom: 2.5rem;
+        }
+
+        .who-we-are .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .who-we-are-content {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .who-we-are-content .mini-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .who-we-are-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .who-we-are-content p {
+            color: var(--text-light);
+            line-height: 1.85;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ── Buy With Confidence (Slider with Images) ── */
+        .confidence-section {
+            padding: 5rem 0;
+            background: #fafafa;
+        }
+
+        .confidence-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            cursor: grab;
+            scroll-behavior: smooth;
+        }
+
+        .confidence-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .confidence-scroll:active {
+            cursor: grabbing;
+        }
+
+        .confidence-card {
+            flex: 0 0 calc(20% - 1.3rem);
+            min-width: 210px;
+            max-width: 260px;
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
+            scroll-snap-align: start;
+            transition: var(--transition);
+        }
+
+        .confidence-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .confidence-card .conf-img {
+            width: 100%;
+            aspect-ratio: 1.4/1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .confidence-card .conf-body {
+            padding: 1.2rem 1rem;
+        }
+
+        .confidence-card .conf-icon {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .confidence-card h5 {
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.4rem;
+            color: var(--accent);
+        }
+
+        .confidence-card p {
+            font-size: 0.74rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 992px) {
+            .confidence-card {
+                flex: 0 0 calc(33.33% - 1rem);
+                min-width: 190px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .confidence-card {
+                flex: 0 0 70vw;
+                min-width: auto;
+                max-width: none;
+            }
+
+            .confidence-scroll {
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .confidence-card {
+                flex: 0 0 80vw;
+            }
+        }
+
+        /* ── Collection Sections (Slider, No Scrollbar) ── */
+        .collection-section {
+            padding: 5rem 0;
+        }
+
+        .collection-section.bg-light {
+            background: #fafafa;
+        }
+
+        .collection-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            cursor: grab;
+            scroll-behavior: smooth;
+        }
+
+        .collection-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .collection-scroll:active {
+            cursor: grabbing;
+        }
+
+        .collection-scroll .coll-card {
+            flex: 0 0 auto;
+            width: 220px;
+            scroll-snap-align: start;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .collection-scroll .coll-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .collection-scroll .coll-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .collection-scroll .coll-card:hover img {
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 768px) {
+            .collection-scroll .coll-card {
+                width: 170px;
+            }
+
+            .collection-scroll {
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .collection-scroll .coll-card {
+                width: 145px;
+            }
+        }
+
+        .view-all-wrap {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* ── Blog Posts (Vertical Slider) ── */
+        .blog-section {
+            padding: 5rem 0;
+            background: #fafafa;
+        }
+
+        .blog-vertical-slider {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: 700px;
+            gap: 1.5rem;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #ccc transparent;
+            padding-right: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .blog-vertical-slider::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .blog-vertical-slider::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 10px;
+        }
+
+        .blog-vertical-slider::-webkit-scrollbar-thumb {
+            background: #d0d0d0;
+            border-radius: 10px;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        .blog-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .blog-card-img {
+            width: 35%;
+            min-width: 200px;
+            aspect-ratio: 1.3/1;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .blog-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover .blog-card-img img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-body {
+            padding: 1.3rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .blog-card-body .blog-date {
+            font-size: 0.7rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--accent);
+            line-height: 1.4;
+        }
+
+        .blog-card-body p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-card-body .read-more {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition-fast);
+            align-self: flex-start;
+        }
+
+        .blog-card-body .read-more:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .blog-vertical-slider {
+                max-height: 600px;
+                gap: 1rem;
+            }
+
+            .blog-card {
+                flex-direction: column;
+            }
+
+            .blog-card-img {
+                width: 100%;
+                min-width: auto;
+                aspect-ratio: 1.6/1;
+            }
+
+            .blog-card-body {
+                padding: 1rem;
+            }
+
+            .blog-card-body h4 {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-vertical-slider {
+                max-height: 500px;
+            }
+
+            .blog-card-body h4 {
+                font-size: 0.82rem;
+            }
+
+            .blog-card-body p {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ── Map Section ── */
+        .map-section {
+            padding: 5rem 0 3rem;
+        }
+
+        .map-wrapper {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .map-wrapper iframe {
+                height: 280px;
+            }
+        }
+
+        /* ── Offer Banner ── */
+        .offer-banner {
+            padding: 4.5rem 0;
+            background: var(--accent);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 65%);
+            animation: slowRotate 25s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes slowRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .offer-banner .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-banner .offer-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .offer-banner h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .offer-banner p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .offer-banner .btn {
+            background: #fff;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .offer-banner .btn:hover {
+            background: #f0f0f0;
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .offer-code {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Video Showcase ── */
         .video-showcase {
             padding: 5rem 0;
         }
 
-        .video-wrapper {
+        .video-showcase .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
-            /* 16:9 */
             height: 0;
             overflow: hidden;
             border-radius: var(--radius-lg);
@@ -961,7 +1708,7 @@ body {
             background: #000;
         }
 
-        .video-wrapper video {
+        .video-showcase .video-wrapper video {
             position: absolute;
             top: 0;
             left: 0;
@@ -1078,89 +1825,6 @@ body {
             .review-card {
                 padding: 1.4rem;
             }
-        }
-
-        .offer-banner {
-            padding: 4.5rem 0;
-            background: var(--accent);
-            color: #fff;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .offer-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 65%);
-            animation: slowRotate 25s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes slowRotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .offer-banner .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .offer-banner .offer-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .offer-banner h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-            margin-bottom: 0.8rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .offer-banner p {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .offer-banner .btn {
-            background: #fff;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .offer-banner .btn:hover {
-            background: #f0f0f0;
-            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-        }
-
-        .offer-code {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px dashed rgba(255, 255, 255, 0.4);
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
         }
 
         /* ── Checkout Modal ── */
@@ -1462,6 +2126,63 @@ body {
             letter-spacing: 0.03em;
         }
 
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 0.8rem 0 0;
+            margin-top: 0.5rem;
+        }
+
+        .payment-icons .pay-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid #222;
+            color: #777;
+            background: #111;
+            transition: var(--transition-fast);
+        }
+
+        .payment-icons .pay-badge:hover {
+            color: #fff;
+            border-color: #555;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            z-index: 999;
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 32px rgba(37, 211, 102, 0.55);
+            background: #20bd5a;
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(35px);
@@ -1475,7 +2196,7 @@ body {
 
         .back-to-top {
             position: fixed;
-            bottom: 2rem;
+            bottom: 6.5rem;
             right: 2rem;
             width: 44px;
             height: 44px;
@@ -1486,7 +2207,7 @@ body {
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 999;
+            z-index: 998;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
             opacity: 0;
@@ -1520,6 +2241,7 @@ body {
                 box-shadow: var(--shadow-md);
                 gap: 0.8rem;
                 z-index: 999;
+                width: 100%;
             }
 
             .nav-links.active {
@@ -1561,14 +2283,24 @@ body {
             .checkout-modal {
                 padding: 1.8rem 1.2rem 1.5rem;
             }
+
+            .whatsapp-float {
+                bottom: 1.8rem;
+                right: 1rem;
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+            }
+
+            .back-to-top {
+                bottom: 5.5rem;
+                right: 1rem;
+                width: 38px;
+                height: 38px;
+            }
         }
 
-        /* =========================
-   PERFECT MOBILE FIX
-========================= */
-
         @media (max-width: 768px) {
-
             body {
                 overflow-x: hidden;
             }
@@ -1579,11 +2311,12 @@ body {
                 padding-right: 14px;
             }
 
-            /* HERO SECTION */
             .hero {
                 min-height: 92vh;
                 padding-top: 40px;
                 padding-bottom: 40px;
+                width: 100%;
+                overflow: hidden;
             }
 
             .hero-video {
@@ -1621,17 +2354,18 @@ body {
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
+                padding: 0;
+                margin: 0;
             }
 
             .hero-buttons .btn {
                 width: 100%;
-                max-width: 280px;
+                max-width: 260px;
                 justify-content: center;
                 padding: 14px 18px;
                 font-size: 0.78rem;
             }
 
-            /* NAVBAR */
             .navbar {
                 padding: 0.7rem 0;
             }
@@ -1643,7 +2377,6 @@ body {
             .logo-icon {
                 width: 36px;
                 height: 36px;
-                font-size: 0.9rem;
             }
 
             .nav-actions {
@@ -1655,7 +2388,6 @@ body {
                 font-size: 1rem;
             }
 
-            /* TRUST STRIP */
             .trust-strip .container {
                 justify-content: center;
                 gap: 12px;
@@ -1665,7 +2397,6 @@ body {
                 font-size: 0.7rem;
             }
 
-            /* PRODUCTS */
             .product-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
@@ -1688,13 +2419,6 @@ body {
                 font-size: 0.95rem;
             }
 
-            /* BRANDS */
-            .brand-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            /* REVIEWS */
             .reviews-grid {
                 grid-template-columns: 1fr;
             }
@@ -1703,24 +2427,19 @@ body {
                 padding: 1.3rem;
             }
 
-            /* VIDEO */
-            .video-wrapper {
-                border-radius: 18px;
-            }
-
-            /* FOOTER */
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
+            .nav-links {
+                width: 100%;
+                left: 0;
+                right: 0;
+            }
         }
 
-
-        /* EXTRA SMALL DEVICES */
-
         @media (max-width: 480px) {
-
             .hero-content h1 {
                 font-size: 1.9rem;
             }
@@ -1737,117 +2456,115 @@ body {
                 font-size: 0.62rem;
                 line-height: 1.5;
                 padding: 0.6rem;
+                overflow: hidden;
             }
 
             .product-grid {
                 gap: 10px;
             }
-
         }
-        /* =========================
-   OVERFLOW / WHITE SCROLL FIX
-========================= */
 
-*,
-*::before,
-*::after {
-    max-width: 100%;
-}
+        *,
+        *::before,
+        *::after {
+            max-width: 100%;
+        }
 
-section,
-div,
-video,
-img {
-    max-width: 100%;
-}
+        section,
+        div,
+        video,
+        img {
+            max-width: 100%;
+        }
 
-.hero,
-.hero * {
-    min-width: 0;
-}
+        .hero,
+        .hero * {
+            min-width: 0;
+        }
 
-.hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
 
-.hero .container {
-    width: 100%;
-    overflow: hidden;
-}
+        .hero .container {
+            width: 100%;
+            overflow: hidden;
+        }
 
-.hero-content {
-    overflow: hidden;
-}
+        .hero-content {
+            overflow: hidden;
+            padding-left: 0;
+            padding-right: 0;
+        }
 
-.hero-buttons {
-    width: 100%;
-    overflow: hidden;
-}
+        .hero-buttons {
+            width: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
 
-.btn {
-    max-width: 100%;
-}
+        .btn {
+            max-width: 100%;
+        }
 
-/* ⚠️ FIX: Removed overflow:hidden from .navbar so dropdowns (cart & hamburger menu) are not clipped */
-.navbar {
-    width: 100%;
-    /* overflow was previously hidden – removed to show popups above video */
-}
+        .navbar {
+            width: 100%;
+        }
 
-.nav-actions {
-    min-width: 0;
-}
+        .nav-actions {
+            min-width: 0;
+        }
 
-.cart-dropdown {
-    max-width: calc(100vw - 20px);
-}
+        .cart-dropdown {
+            max-width: calc(100vw - 20px);
+        }
 
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
 
-    html,
-    body {
-        overflow-x: hidden !important;
-    }
+            html,
+            body {
+                overflow-x: hidden !important;
+            }
 
-    body {
-        position: relative;
-    }
+            body {
+                position: relative;
+            }
 
-    .hero {
-        width: 100%;
-        overflow: hidden;
-    }
+            .hero {
+                width: 100%;
+                overflow: hidden;
+            }
 
-    .hero-content {
-        width: 100%;
-        padding-left: 0;
-        padding-right: 0;
-    }
+            .hero-content {
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
 
-    .hero-buttons {
-        padding: 0;
-        margin: 0;
-    }
+            .hero-buttons {
+                padding: 0;
+                margin: 0;
+            }
 
-    .hero-buttons .btn {
-        width: 100%;
-        max-width: 260px;
-    }
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 260px;
+            }
 
-    .announcement-bar {
-        overflow: hidden;
-    }
+            .announcement-bar {
+                overflow: hidden;
+            }
 
-    .nav-links {
-        width: 100%;
-        left: 0;
-        right: 0;
-    }
-
-}
+            .nav-links {
+                width: 100%;
+                left: 0;
+                right: 0;
+            }
+        }
     </style>
 </head>
 
@@ -1860,13 +2577,14 @@ img {
     <nav class="navbar" id="navbar">
         <div class="container">
             <a href="#" class="logo">
-                <div class="logo-icon">TRX</div>
+                <img src="https://i.postimg.cc/0Q06J8ST/Chat-GPT-Image-May-9-2026-10-20-00-AM.png"
+                    alt="TRX Royal Watches Logo" class="logo-icon">
                 <div class="logo-text">Royal Watches<small>Since 2025</small></div>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#most-popular">Popular</a></li>
-                <li><a href="#brands">Brands</a></li>
+                <li><a href="#coveted">Popular</a></li>
+                <li><a href="#brands-new">Brands</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#offer">Offers</a></li>
@@ -1880,7 +2598,6 @@ img {
                 </button>
                 <a href="#" aria-label="Account"><i class="fa-regular fa-user"></i></a>
                 <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
-
                 <div class="cart-dropdown" id="cartDropdown">
                     <h4 id="cartHeading">Shopping Cart (3)</h4>
                     <div class="cart-items-container" id="cartItemsContainer">
@@ -1914,11 +2631,10 @@ img {
                     </div>
                     <p class="cart-empty-msg" id="cartEmptyMsg">Your cart is empty.</p>
                     <div class="cart-total">
-                        <span>Total:</span>
-                        <span id="cartTotalDisplay">$9,000</span>
+                        <span>Total:</span><span id="cartTotalDisplay">$9,000</span>
                     </div>
                     <button class="btn btn-primary checkout-trigger" id="cartCheckoutBtn"
-                        style="background:var(--accent); color:#fff;">Checkout</button>
+                        style="background:var(--accent);color:#fff;">Checkout</button>
                 </div>
             </div>
         </div>
@@ -1931,7 +2647,6 @@ img {
         </div>
     </div>
 
-    <!-- ── Checkout Modal ── -->
     <div class="checkout-overlay" id="checkoutOverlay">
         <div class="checkout-modal" id="checkoutModal">
             <button class="close-checkout" id="closeCheckout" aria-label="Close checkout"><i
@@ -1941,8 +2656,7 @@ img {
                 <p class="checkout-subtitle">Review Your Order</p>
                 <ul class="checkout-items" id="checkoutItemsList"></ul>
                 <div class="checkout-total-row">
-                    <span>Total:</span>
-                    <span id="checkoutTotal">$9,000</span>
+                    <span>Total:</span><span id="checkoutTotal">$9,000</span>
                 </div>
                 <button class="btn btn-primary" id="placeOrderBtn"><i class="fa-solid fa-lock"></i> Place Order</button>
             </div>
@@ -1958,14 +2672,8 @@ img {
         </div>
     </div>
 
-    <!-- ── Hero with video background ── -->
+    <!-- Hero -->
     <section class="hero" id="home">
-        <!--
-        ═══════════════════════════════════════════
-        HERO VIDEO – REPLACE THE src BELOW
-        Use your own MP4/WebM video link.
-        ═══════════════════════════════════════════
-        -->
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="videos/27.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -1978,7 +2686,7 @@ img {
                     Authenticity, elegance, and prestige delivered to your wrist.</p>
                 <div class="hero-buttons">
                     <a href="#products" class="btn btn-primary"><i class="fa-solid fa-gem"></i> Explore Collection</a>
-                    <a href="#brands" class="btn btn-outline" style="color:#fff; border-color:#fff;">View Brands</a>
+                    <a href="#brands-new" class="btn btn-outline" style="color:#fff;border-color:#fff;">View Brands</a>
                 </div>
             </div>
         </div>
@@ -1994,123 +2702,120 @@ img {
         </div>
     </div>
 
-    <!-- ── Most Popular ── -->
-    <section class="most-popular" id="most-popular">
+    <!-- THE WORLD'S MOST COVETED WATCHES (SLIDER) -->
+    <section class="coveted-section" id="coveted">
         <div class="container">
-            <h2 class="section-title reveal">Most Popular</h2>
-            <div class="section-divider"></div>
-            <p class="section-subtitle reveal">Top Picks This Season</p>
-            <div class="popular-grid">
-                <!--
-                ══════════════════════════════════════════════════════
-                MOST POPULAR IMAGES – REPLACE 'src' WITH YOUR IMAGES
-                ══════════════════════════════════════════════════════
-                -->
-                <div class="popular-card reveal">
-                    <img src="https://i.postimg.cc/XvTsjLjj/20.jpg" alt="Popular 1">
+            <p class="section-subtitle-gold reveal">THE WORLD'S MOST COVETED WATCHES</p>
+            <h2 class="section-title reveal">SIGNATURE COLLECTIONS</h2>
+            <div class="section-divider gold"></div>
+            <div class="signature-slider-wrapper reveal">
+                <button class="slider-arrow prev" id="sigPrev" aria-label="Previous slide"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <div class="signature-slider" id="signatureSlider">
+                    <div class="signature-card">
+                        <div class="signature-card-img">
+                            <img src="https://i.postimg.cc/4N5kfB8Y/a.jpg" alt="Audemars Piguet" loading="lazy">
+                        </div>
+                        <div class="signature-card-info">
+                            <h4>AUDEMARS PIGUET</h4>
+                            <button class="btn-sm">View products</button>
+                        </div>
+                    </div>
+                    <div class="signature-card">
+                        <div class="signature-card-img">
+                            <img src="https://i.postimg.cc/dtBPs4WD/b.webp" alt="Patek Philippe" loading="lazy">
+                        </div>
+                        <div class="signature-card-info">
+                            <h4>PATEK PHILIPPE</h4>
+                            <button class="btn-sm">View products</button>
+                        </div>
+                    </div>
+                    <div class="signature-card">
+                        <div class="signature-card-img">
+                            <img src="https://i.postimg.cc/7YV8HmBf/c.webp" alt="Richard Mille" loading="lazy">
+                        </div>
+                        <div class="signature-card-info">
+                            <h4>RICHARD MILLE</h4>
+                            <button class="btn-sm">View products</button>
+                        </div>
+                    </div>
+                    <div class="signature-card">
+                        <div class="signature-card-img">
+                            <img src="https://i.postimg.cc/MKxJJhYV/d.webp" alt="Rolex" loading="lazy">
+                        </div>
+                        <div class="signature-card-info">
+                            <h4>ROLEX</h4>
+                            <button class="btn-sm">View products</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="popular-card reveal">
-                    <img src="https://i.postimg.cc/5tZs4g4f/21.jpg" alt="Popular 2">
-                </div>
-                <div class="popular-card reveal">
-                    <img src="https://i.postimg.cc/CKWch7hF/22.jpg" alt="Popular 3">
-                </div>
-                <div class="popular-card reveal">
-                    <img src="https://i.postimg.cc/CKWch7hS/23.jpg" alt="Popular 4">
-                </div>
-                <div class="popular-card reveal">
-                    <img src="https://i.postimg.cc/pdgsWCWv/24.jpg" alt="Popular 5">
-                </div>
-                <div class="popular-card reveal">
-                    <img src="https://i.postimg.cc/mr0mLjLs/25.jpg" alt="Popular 6">
-                </div>
+                <button class="slider-arrow next" id="sigNext" aria-label="Next slide"><i
+                        class="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
-    <!-- ── Brands ── -->
-    <section class="brands" id="brands">
+    <!-- Explore Brands (Compact) -->
+    <section class="brands-new" id="brands-new">
         <div class="container">
             <h2 class="section-title reveal">Explore Brands</h2>
             <div class="section-divider"></div>
             <p class="section-subtitle reveal">World-Renowned Watchmakers</p>
-            <div class="brand-grid">
-                <!-- Brand cards unchanged except image size/opacity already in CSS -->
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/nzNKYhjX/rolex-removebg-preview.png" alt="Rolex">
-                    </div>
-                    <div class="brand-card-name">Rolex</div>
+            <div class="brands-new-grid">
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/rmcNwCZN/e.jpg" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">Rolex</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/YSJpf53C/omega.webp" alt="Omega">
-                    </div>
-                    <div class="brand-card-name">Omega</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/nzZGhYSK/f.jpg" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">Patek Philippe</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/N0Wg734f/fossil.webp" alt="Fossil">
-                    </div>
-                    <div class="brand-card-name">Fossil</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/V61WkBZq/g.jpg" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">A. Piguet</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/Dzt2d9g4/gshok.avif" alt="G-Shock">
-                    </div>
-                    <div class="brand-card-name">G-Shock</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/9MVYQtgy/h.avif" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">R. Mille</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/V629Bkr6/patek-removebg-preview.png" alt="Patek Phillipe">
-                    </div>
-                    <div class="brand-card-name">PATEK PHILLIPE</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/3R7FxCfv/i.jpg" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">Omega</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/RF21QZ6h/armani-removebg-preview.png" alt="Armani">
-                    </div>
-                    <div class="brand-card-name">ARMANI</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/G2rxmJgD/j.avif" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">Cartier</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/XJtKcYGp/casio-removebg-preview.png" alt="Casio">
-                    </div>
-                    <div class="brand-card-name">Casio</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/B6sBnc71/k.webp" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">Hublot</span>
                 </div>
-                <div class="brand-card reveal">
-                    <div class="brand-card-img">
-                        <img src="https://i.postimg.cc/wvn5cjyT/cartier-removebg-preview.png" alt="Cartier">
-                    </div>
-                    <div class="brand-card-name">CARTIER</div>
+                <div class="brand-mini-card reveal">
+                    <img src="https://i.postimg.cc/63wfpLbq/l.webp" alt="Brand" loading="lazy">
+                    <span class="brand-name-tag">Tag Heuer</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── Featured Timepieces ── -->
+    <!-- Featured Timepieces -->
     <section class="products" id="products">
         <div class="container">
             <h2 class="section-title reveal">Featured Timepieces</h2>
             <div class="section-divider"></div>
             <p class="section-subtitle reveal">Handpicked For Your Collection</p>
             <div class="product-grid">
-                <!-- product cards unchanged -->
                 <div class="product-card reveal">
                     <div class="badge">Sale</div>
                     <button class="wishlist-btn" aria-label="Add to wishlist"><i
                             class="fa-regular fa-heart"></i></button>
-                            <div class="product-img">
-                                <img src="https://i.postimg.cc/tRZNRw7x/rolex.jpg" alt="Rolex Watch">
-                            </div>
+                    <div class="product-img"><img src="https://i.postimg.cc/tRZNRw7x/rolex.jpg" alt="Rolex Watch"
+                            loading="lazy"></div>
                     <div class="product-info">
                         <h3>Rolex Submariner Elite</h3>
                         <p class="brand-tag">Rolex</p>
-                        <div class="price-row">
-                            <span class="price-current">$2,500</span>
-                            <span class="price-original">$7,000</span>
-                            <span class="price-discount">-64%</span>
-                        </div>
+                        <div class="price-row"><span class="price-current">$2,500</span><span
+                                class="price-original">$7,000</span><span class="price-discount">-64%</span></div>
                         <button class="add-to-cart"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
                     </div>
                 </div>
@@ -2118,17 +2823,13 @@ img {
                     <div class="badge">Sale</div>
                     <button class="wishlist-btn" aria-label="Add to wishlist"><i
                             class="fa-regular fa-heart"></i></button>
-                            <div class="product-img">
-                                <img src="https://i.postimg.cc/RhZrKm8v/omega.jpg" alt="Rolex Watch">
-                            </div>
+                    <div class="product-img"><img src="https://i.postimg.cc/RhZrKm8v/omega.jpg" alt="Omega Watch"
+                            loading="lazy"></div>
                     <div class="product-info">
                         <h3>Omega Seamaster Pro</h3>
                         <p class="brand-tag">Omega</p>
-                        <div class="price-row">
-                            <span class="price-current">$2,500</span>
-                            <span class="price-original">$7,500</span>
-                            <span class="price-discount">-66%</span>
-                        </div>
+                        <div class="price-row"><span class="price-current">$2,500</span><span
+                                class="price-original">$7,500</span><span class="price-discount">-66%</span></div>
                         <button class="add-to-cart"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
                     </div>
                 </div>
@@ -2136,17 +2837,14 @@ img {
                     <div class="badge">Sale</div>
                     <button class="wishlist-btn" aria-label="Add to wishlist"><i
                             class="fa-regular fa-heart"></i></button>
-                            <div class="product-img">
-                                <img src="https://i.postimg.cc/kGgrKCZ9/fossil.jpg" alt="Rolex Watch">
-                            </div>
+                    <div class="product-img"><img src="https://i.postimg.cc/kGgrKCZ9/fossil.jpg" alt="Fossil Watch"
+                            loading="lazy">
+                    </div>
                     <div class="product-info">
                         <h3>Fossil Chronograph X</h3>
                         <p class="brand-tag">Fossil</p>
-                        <div class="price-row">
-                            <span class="price-current">$4,000</span>
-                            <span class="price-original">$5,000</span>
-                            <span class="price-discount">-20%</span>
-                        </div>
+                        <div class="price-row"><span class="price-current">$4,000</span><span
+                                class="price-original">$5,000</span><span class="price-discount">-20%</span></div>
                         <button class="add-to-cart"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
                     </div>
                 </div>
@@ -2154,17 +2852,14 @@ img {
                     <div class="badge">Sale</div>
                     <button class="wishlist-btn" aria-label="Add to wishlist"><i
                             class="fa-regular fa-heart"></i></button>
-                            <div class="product-img">
-                                <img src="https://i.postimg.cc/7hZv04cw/casio.jpg" alt="Rolex Watch">
-                            </div>
+                    <div class="product-img"><img src="https://i.postimg.cc/7hZv04cw/casio.jpg" alt="G-Shock Watch"
+                            loading="lazy">
+                    </div>
                     <div class="product-info">
                         <h3>G-Shock Mudmaster</h3>
                         <p class="brand-tag">G-Shock</p>
-                        <div class="price-row">
-                            <span class="price-current">$4,100</span>
-                            <span class="price-original">$6,000</span>
-                            <span class="price-discount">-31%</span>
-                        </div>
+                        <div class="price-row"><span class="price-current">$4,100</span><span
+                                class="price-original">$6,000</span><span class="price-discount">-31%</span></div>
                         <button class="add-to-cart"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
                     </div>
                 </div>
@@ -2172,17 +2867,13 @@ img {
                     <div class="badge">Sale</div>
                     <button class="wishlist-btn" aria-label="Add to wishlist"><i
                             class="fa-regular fa-heart"></i></button>
-                            <div class="product-img">
-                                <img src="https://i.postimg.cc/Y0CcY7V7/ap.jpg" alt="Rolex Watch">
-                            </div>
+                    <div class="product-img"><img src="https://i.postimg.cc/Y0CcY7V7/ap.jpg" alt="AP Watch"
+                            loading="lazy"></div>
                     <div class="product-info">
                         <h3>A. Piguet Royal Oak</h3>
                         <p class="brand-tag">Audemars Piguet</p>
-                        <div class="price-row">
-                            <span class="price-current">$5,900</span>
-                            <span class="price-original">$7,500</span>
-                            <span class="price-discount">-21%</span>
-                        </div>
+                        <div class="price-row"><span class="price-current">$5,900</span><span
+                                class="price-original">$7,500</span><span class="price-discount">-21%</span></div>
                         <button class="add-to-cart"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
                     </div>
                 </div>
@@ -2190,17 +2881,13 @@ img {
                     <div class="badge">Sale</div>
                     <button class="wishlist-btn" aria-label="Add to wishlist"><i
                             class="fa-regular fa-heart"></i></button>
-                            <div class="product-img">
-                                <img src="https://i.postimg.cc/3NxMmh6Q/titan.jpg" alt="Rolex Watch">
-                            </div>
+                    <div class="product-img"><img src="https://i.postimg.cc/3NxMmh6Q/titan.jpg" alt="Titan Watch"
+                            loading="lazy"></div>
                     <div class="product-info">
                         <h3>Titan Edge Slim</h3>
                         <p class="brand-tag">Titan</p>
-                        <div class="price-row">
-                            <span class="price-current">$3,500</span>
-                            <span class="price-original">$7,500</span>
-                            <span class="price-discount">-53%</span>
-                        </div>
+                        <div class="price-row"><span class="price-current">$3,500</span><span
+                                class="price-original">$7,500</span><span class="price-discount">-53%</span></div>
                         <button class="add-to-cart"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
                     </div>
                 </div>
@@ -2208,93 +2895,182 @@ img {
         </div>
     </section>
 
-    <!-- ── Video Showcase Section ── -->
-    <section class="video-showcase">
+    <!-- Who We Are -->
+    <section class="who-we-are">
         <div class="container">
-            <!--
-            ═══════════════════════════════════════════════
-            VIDEO SHOWCASE – REPLACE THE src BELOW
-            YouTube‑style 16:9 ratio, fully responsive.
-            ═══════════════════════════════════════════════
-            -->
-            <div class="video-wrapper">
+            <div class="video-wrapper reveal">
                 <video autoplay muted loop playsinline>
-                    <source src="videos/26.mp4" type="video/mp4">
+                    <source src="videos/28.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
+            <div class="who-we-are-content reveal">
+                <p class="mini-label">Who We Are</p>
+                <h2>A Trusted Luxury Watch Marketplace in Dubai</h2>
+                <p>At DubaiLuxuryWatch, we operate as a professional luxury watch marketplace based in Dubai,
+                    specializing in rare, collectible, and investment grade timepieces. Our platform connects serious
+                    buyers and sellers through a secure, transparent process offering carefully curated watches from
+                    leading brands such as Patek Philippe, Rolex, Audemars Piguet, and Richard Mille.</p>
+                <a href="#products" class="btn btn-primary">Explore Collections</a>
+            </div>
         </div>
     </section>
 
-    <!-- ── Reviews ── -->
-    <section class="reviews" id="reviews">
+    <!-- Buy With Confidence (Slider with Images) -->
+    <section class="confidence-section">
         <div class="container">
-            <h2 class="section-title reveal">What Our Clients Say</h2>
+            <p class="section-subtitle reveal" style="margin-bottom:0.2rem;">A secure, transparent, and professional
+                luxury watch marketplace</p>
+            <h2 class="section-title reveal">Buy With Confidence</h2>
             <div class="section-divider"></div>
-            <p class="section-subtitle reveal">Trusted by Watch Enthusiasts Worldwide</p>
-            <div class="reviews-grid">
-                <!-- Review cards unchanged -->
-                <div class="review-card reveal">
-                    <div class="review-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="review-text">"The attention to detail on my Rolex Submariner is simply breathtaking. TRX
-                        Royal Watches delivered exactly what they promised—authentic, pristine, and packaged like a
-                        dream. I've already recommended them to colleagues in Paris."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">JD</div>
-                        <div class="review-author-info">
-                            <h5>Jean-Pierre Dubois</h5>
-                            <span>Paris, France</span>
-                            <div class="review-verified"><i class="fa-solid fa-shield-halved"></i> Verified Purchase
-                            </div>
-                        </div>
+            <div class="confidence-scroll" id="confidenceScroll">
+                <div class="confidence-card reveal">
+                    <img src="https://i.postimg.cc/J08rgthF/m.avif" alt="Top-notch support" class="conf-img"
+                        loading="lazy">
+                    <div class="conf-body">
+                        <div class="conf-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h5>Top-notch support</h5>
+                        <p>Dedicated support before and after your purchase</p>
                     </div>
                 </div>
-                <div class="review-card reveal">
-                    <div class="review-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="review-text">"Living in Milan, I have access to many luxury boutiques, but TRX Royal
-                        Watches surprised me with their impeccable service and competitive pricing. My Omega Seamaster
-                        arrived in just three days—flawless and with full documentation."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">AR</div>
-                        <div class="review-author-info">
-                            <h5>Alessandro Romano</h5>
-                            <span>Milan, Italy</span>
-                            <div class="review-verified"><i class="fa-solid fa-shield-halved"></i> Verified Purchase
-                            </div>
-                        </div>
+                <div class="confidence-card reveal">
+                    <img src="https://i.postimg.cc/XqWjhXvh/n.avif" alt="Authenticity" class="conf-img" loading="lazy">
+                    <div class="conf-body">
+                        <div class="conf-icon"><i class="fa-solid fa-certificate"></i></div>
+                        <h5>Authenticity</h5>
+                        <p>100% authentic watches, professionally verified</p>
                     </div>
                 </div>
-                <div class="review-card reveal">
-                    <div class="review-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star-half-stroke"></i>
+                <div class="confidence-card reveal">
+                    <img src="https://i.postimg.cc/2yYkJ35K/o.avif" alt="Worldwide Delivery" class="conf-img"
+                        loading="lazy">
+                    <div class="conf-body">
+                        <div class="conf-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                        <h5>WORLDWIDE DELIVERY</h5>
+                        <p>Insured worldwide delivery with trusted couriers</p>
                     </div>
-                    <p class="review-text">"I was hesitant about buying a luxury watch online, but TRX Royal Watches
-                        exceeded all expectations. The Fossil Chronograph X I ordered is stunning, and the customer
-                        support team in New York was incredibly responsive. Truly a global brand!"</p>
-                    <div class="review-author">
-                        <div class="review-avatar">MC</div>
-                        <div class="review-author-info">
-                            <h5>Mei-Lin Chen</h5>
-                            <span>Singapore</span>
-                            <div class="review-verified"><i class="fa-solid fa-shield-halved"></i> Verified Purchase
-                            </div>
-                        </div>
+                </div>
+                <div class="confidence-card reveal">
+                    <img src="https://i.postimg.cc/MHw64XGr/p.avif" alt="Secure payments" class="conf-img"
+                        loading="lazy">
+                    <div class="conf-body">
+                        <div class="conf-icon"><i class="fa-solid fa-lock"></i></div>
+                        <h5>Secure payments</h5>
+                        <p>Encrypted and secure payment processing</p>
+                    </div>
+                </div>
+                <div class="confidence-card reveal">
+                    <img src="https://i.postimg.cc/rmxyQ5qH/q.avif" alt="Satisfied or refunded" class="conf-img"
+                        loading="lazy">
+                    <div class="conf-body">
+                        <div class="conf-icon"><i class="fa-solid fa-rotate-left"></i></div>
+                        <h5>Satisfied or refunded</h5>
+                        <p>Hassle-free returns in line with our return policy</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Rolex Collection -->
+    <section class="collection-section" id="rolex-collection">
+        <div class="container">
+            <h2 class="section-title reveal">Rolex Collection</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Timeless Elegance &amp; Precision</p>
+            <div class="collection-scroll">
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/GpRX4CHt/30.webp" alt="Rolex"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/W4V5dvh3/31.webp" alt="Rolex"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/zfNxyrV8/34.webp" alt="Rolex"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/cJWFvSrW/35.webp" alt="Rolex"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/rpTfDkKq/36.webp" alt="Rolex"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/NjmNGMfG/37.webp" alt="Rolex"
+                        loading="lazy"></div>
+            </div>
+            <div class="view-all-wrap"><button class="btn btn-outline">View All</button></div>
+        </div>
+    </section>
+
+    <!-- Patek Philippe Collection -->
+    <section class="collection-section bg-light" id="patek-collection">
+        <div class="container">
+            <h2 class="section-title reveal">Patek Philippe Collection</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Heritage &amp; Haute Horlogerie</p>
+            <div class="collection-scroll">
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/qvw16FnP/38.webp" alt="Patek"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/Hkz68N5f/39.webp" alt="Patek"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/hts2QYxw/41.webp" alt="Patek"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/mgjm1nMJ/42.webp" alt="Patek"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/GmKXTfYf/44.webp" alt="Patek"
+                        loading="lazy"></div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/jScMn1Nk/45.webp" alt="Patek"
+                        loading="lazy"></div>
+            </div>
+            <div class="view-all-wrap"><button class="btn btn-outline">View All</button></div>
+        </div>
+    </section>
+
+    <!-- Richard Mille Collection -->
+    <section class="collection-section" id="rm-collection">
+        <div class="container">
+            <h2 class="section-title reveal">Richard Mille Collection</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Ultra-Luxury &amp; Innovation</p>
+            <div class="collection-scroll">
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/Jnk3xYDL/46.webp" alt="RM" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/0QwGnXM1/47.webp" alt="RM" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/ydZhjpJM/49.webp" alt="RM" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/TwDj0NL8/50.webp" alt="RM" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/0QwGnX6L/51.avif" alt="RM" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/cHn7hkK2/52.avif" alt="RM" loading="lazy">
+                </div>
+            </div>
+            <div class="view-all-wrap"><button class="btn btn-outline">View All</button></div>
+        </div>
+    </section>
+
+    <!-- Audemars Piguet Collection -->
+    <section class="collection-section bg-light" id="ap-collection">
+        <div class="container">
+            <h2 class="section-title reveal">Audemars Piguet Collection</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Royal Oak &amp; Beyond</p>
+            <div class="collection-scroll">
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/cHn7hkK2/52.avif" alt="AP" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/ZYLvmhhy/53.webp" alt="AP" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/1RKVSZZq/54.webp" alt="AP" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/3N9kF2Bw/56.webp" alt="AP" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/prkmJKZX/57.webp" alt="AP" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/prkmJKZL/58.webp" alt="AP" loading="lazy">
+                </div>
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/zvpyFTjJ/59.webp" alt="AP" loading="lazy">
+                </div>
+            </div>
+            <div class="view-all-wrap"><button class="btn btn-outline">View All</button></div>
+        </div>
+    </section>
+
+    <!-- Royal Savings -->
     <section class="offer-banner" id="offer">
         <div class="container reveal">
             <span class="offer-icon"><i class="fa-solid fa-tags"></i></span>
@@ -2306,6 +3082,124 @@ img {
         </div>
     </section>
 
+    <!-- Video Showcase -->
+    <section class="video-showcase">
+        <div class="container">
+            <div class="video-wrapper reveal">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/26.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 class="section-title reveal">What Our Clients Say</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Trusted by Watch Enthusiasts Worldwide</p>
+            <div class="reviews-grid">
+                <div class="review-card reveal">
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"The attention to detail on my Rolex Submariner is simply breathtaking. TRX
+                        Royal Watches delivered exactly what they promised—authentic, pristine, and packaged like a
+                        dream."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">JD</div>
+                        <div class="review-author-info">
+                            <h5>Jean-Pierre Dubois</h5><span>Paris, France</span>
+                            <div class="review-verified"><i class="fa-solid fa-shield-halved"></i> Verified Purchase
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card reveal">
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Living in Milan, I have access to many luxury boutiques, but TRX Royal
+                        Watches surprised me with their impeccable service and competitive pricing."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">AR</div>
+                        <div class="review-author-info">
+                            <h5>Alessandro Romano</h5><span>Milan, Italy</span>
+                            <div class="review-verified"><i class="fa-solid fa-shield-halved"></i> Verified Purchase
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card reveal">
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star-half-stroke"></i></div>
+                    <p class="review-text">"The Fossil Chronograph X I ordered is stunning, and the customer support
+                        team was incredibly responsive. Truly a global brand!"</p>
+                    <div class="review-author">
+                        <div class="review-avatar">MC</div>
+                        <div class="review-author-info">
+                            <h5>Mei-Lin Chen</h5><span>Singapore</span>
+                            <div class="review-verified"><i class="fa-solid fa-shield-halved"></i> Verified Purchase
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts (Vertical Slider) -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <h2 class="section-title reveal">Blog Posts</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Latest Insights &amp; Stories</p>
+            <div class="blog-vertical-slider reveal">
+                <div class="blog-card">
+                    <div class="blog-card-img"><img src="https://i.postimg.cc/ryhygykY/60.webp" alt="Blog 1"
+                            loading="lazy"></div>
+                    <div class="blog-card-body">
+                        <p class="blog-date">Apr 26, 2026</p>
+                        <h4>Buy Luxury Watches in Dubai: The Real Market Behind Rolex, Patek Philippe, Richard Mille &
+                            Audemars Piguet</h4>
+                        <p>The global luxury watch market has changed dramatically over the last decade. Today, owning a
+                            high-demand timepiece is no longer simply about walking into a boutique and making a
+                            purchase. The most...</p>
+                        <a href="#" class="read-more">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-img"><img src="https://i.postimg.cc/xjsjgj27/61.webp" alt="Blog 2"
+                            loading="lazy"></div>
+                    <div class="blog-card-body">
+                        <p class="blog-date">Mar 26, 2026</p>
+                        <h4>Inside the World of Patek Philippe: Craftsmanship, Heritage, and the Art of Haute Horlogerie
+                        </h4>
+                        <p>When people talk about true luxury watches, they're not talking about price. They're talking
+                            about craft, heritage, and permanence. Few names represent this better than Patek Philippe.
+                            Founded in G...</p>
+                        <a href="#" class="read-more">Read more</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-img"><img src="https://i.postimg.cc/Wp9pSpvS/62.jpg" alt="Blog 3"
+                            loading="lazy"></div>
+                    <div class="blog-card-body">
+                        <p class="blog-date">Dec 17, 2025</p>
+                        <h4>Why Richard Mille Dominates Dubai's Ultra-Luxury Watch Market in 2025</h4>
+                        <p>Why Richard Mille dominates Dubai's ultra-luxury watch market in 2025, driven by scarcity,
+                            private sourcing, and collector demand.</p>
+                        <a href="#" class="read-more">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
     <section class="newsletter">
         <div class="container">
             <div class="newsletter-box reveal">
@@ -2313,7 +3207,7 @@ img {
                 <h2 class="section-title" style="font-size:1.6rem;">Join the Royal Circle</h2>
                 <p class="section-subtitle" style="margin-bottom:0;">Exclusive access to new arrivals & VIP offers</p>
                 <form class="newsletter-form"
-                    onsubmit="event.preventDefault(); alert('🎉 Welcome to the TRX Royal Circle! You will receive exclusive updates.');">
+                    onsubmit="event.preventDefault();alert('🎉 Welcome to the TRX Royal Circle! You will receive exclusive updates.');">
                     <input type="email" placeholder="Enter your email address" required>
                     <button type="submit"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
                 </form>
@@ -2321,6 +3215,22 @@ img {
         </div>
     </section>
 
+    <!-- Map -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title reveal">Our Location</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle reveal">Visit Us in Dubai</p>
+            <div class="map-wrapper reveal">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.74529707937!2d55.27078261501095!3d25.19708008388205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0xff45e502e1ceb7e2!2sBurj+Khalifa!5e0!3m2!1sen!2sus!4v1617974401000!5m2!1sen!2sus"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Our Location"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -2357,12 +3267,17 @@ img {
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
-                    <p>
-                        <i class="fa-solid fa-envelope"></i> support@trxroyalwatches.com<br>
-                        <i class="fa-solid fa-phone"></i> +1 (800) 123-4567<br>
-                        <i class="fa-solid fa-location-dot"></i> New York, NY 10001, USA
-                    </p>
+                    <p><i class="fa-solid fa-envelope"></i> support@trxroyalwatches.com<br><i
+                            class="fa-solid fa-phone"></i> +1 (800) 123-4567<br><i class="fa-solid fa-location-dot"></i>
+                        New York, NY 10001, USA</p>
                 </div>
+            </div>
+            <div class="payment-icons">
+                <span class="pay-badge">American Express</span>
+                <span class="pay-badge">Apple Pay</span>
+                <span class="pay-badge">Google Pay</span>
+                <span class="pay-badge">Visa</span>
+                <span class="pay-badge">Mastercard</span>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 TRX Royal Watches. All Rights Reserved. | Luxury Watches &amp; Accessories</p>
@@ -2370,27 +3285,24 @@ img {
         </div>
     </footer>
 
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/18001234567" class="whatsapp-float" target="_blank" rel="noopener"
+        aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
     <script>
-        // ── Mobile Menu Toggle ──
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+        navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { navLinks.classList.remove('active'); }); });
 
-        // ── Search Overlay ──
         const searchToggle = document.getElementById('searchToggle');
         const searchOverlay = document.getElementById('searchOverlay');
         const closeSearch = document.getElementById('closeSearch');
         const searchInput = document.getElementById('searchInput');
-
         searchToggle.addEventListener('click', () => {
             searchOverlay.classList.add('active');
             searchInput.focus();
@@ -2406,7 +3318,6 @@ img {
             }
         });
 
-        // ── Cart Dropdown Toggle ──
         const cartToggle = document.getElementById('cartToggle');
         const cartDropdown = document.getElementById('cartDropdown');
         cartToggle.addEventListener('click', (e) => {
@@ -2419,36 +3330,19 @@ img {
             }
         });
 
-        // ── Update Cart UI (count, total, heading, empty state) ──
         function updateCartUI() {
             const cartItemsContainer = document.getElementById('cartItemsContainer');
             const allCartItems = cartItemsContainer.querySelectorAll('.cart-item');
             let activeItems = [];
-            allCartItems.forEach(item => {
-                if (item.style.display !== 'none') {
-                    activeItems.push(item);
-                }
-            });
-
+            allCartItems.forEach(item => { if (item.style.display !== 'none') { activeItems.push(item); } });
             const count = activeItems.length;
-            const cartCount = document.getElementById('cartCount');
-            const cartHeading = document.getElementById('cartHeading');
-            const cartTotalDisplay = document.getElementById('cartTotalDisplay');
+            document.getElementById('cartCount').textContent = count;
+            document.getElementById('cartHeading').textContent = 'Shopping Cart (' + count + ')';
+            let total = 0;
+            activeItems.forEach(item => { total += parseFloat(item.getAttribute('data-price')) || 0; });
+            document.getElementById('cartTotalDisplay').textContent = '$' + total.toLocaleString();
             const cartEmptyMsg = document.getElementById('cartEmptyMsg');
             const cartCheckoutBtn = document.getElementById('cartCheckoutBtn');
-
-            cartCount.textContent = count;
-            cartHeading.textContent = 'Shopping Cart (' + count + ')';
-
-            // Calculate total
-            let total = 0;
-            activeItems.forEach(item => {
-                const price = parseFloat(item.getAttribute('data-price')) || 0;
-                total += price;
-            });
-            cartTotalDisplay.textContent = '$' + total.toLocaleString();
-
-            // Show/hide empty message
             if (count === 0) {
                 cartEmptyMsg.classList.add('show');
                 cartCheckoutBtn.style.opacity = '0.5';
@@ -2460,13 +3354,10 @@ img {
             }
         }
 
-        // ── Attach Remove Handlers to Cart X Buttons ──
         function attachCartRemoveHandlers() {
-            const removeButtons = document.querySelectorAll('#cartItemsContainer .cart-item-remove');
-            removeButtons.forEach(btn => {
+            document.querySelectorAll('#cartItemsContainer .cart-item-remove').forEach(btn => {
                 const newBtn = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newBtn, btn);
-
                 newBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     const cartItem = this.closest('.cart-item');
@@ -2487,11 +3378,9 @@ img {
                 });
             });
         }
-
         attachCartRemoveHandlers();
         updateCartUI();
 
-        // ── Checkout Modal ──
         const checkoutOverlay = document.getElementById('checkoutOverlay');
         const closeCheckout = document.getElementById('closeCheckout');
         const checkoutItemsList = document.getElementById('checkoutItemsList');
@@ -2506,30 +3395,19 @@ img {
             const cartItemsContainer = document.getElementById('cartItemsContainer');
             const allCartItems = cartItemsContainer.querySelectorAll('.cart-item');
             let activeItems = [];
-            allCartItems.forEach(item => {
-                if (item.style.display !== 'none') {
-                    activeItems.push(item);
-                }
-            });
-
-            if (activeItems.length === 0) {
-                alert('Your cart is empty. Please add items before checking out.');
-                return;
-            }
-
+            allCartItems.forEach(item => { if (item.style.display !== 'none') { activeItems.push(item); } });
+            if (activeItems.length === 0) { alert('Your cart is empty. Please add items before checking out.'); return; }
             checkoutItemsList.innerHTML = '';
             let total = 0;
             activeItems.forEach(item => {
                 const name = item.querySelector('.cart-item-info h5').textContent;
                 const priceText = item.querySelector('.cart-item-info p').textContent;
-                const price = parseFloat(item.getAttribute('data-price')) || 0;
-                total += price;
+                total += parseFloat(item.getAttribute('data-price')) || 0;
                 const li = document.createElement('li');
                 li.innerHTML = '<span>' + name + '</span><span>' + priceText + '</span>';
                 checkoutItemsList.appendChild(li);
             });
             checkoutTotal.textContent = '$' + total.toLocaleString();
-
             checkoutContent.style.display = 'block';
             checkoutSuccess.classList.remove('show');
             checkoutOverlay.classList.add('active');
@@ -2541,26 +3419,16 @@ img {
             checkoutOverlay.classList.remove('active');
             document.body.style.overflow = '';
         }
-
         cartCheckoutBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             openCheckoutModal();
         });
-
         closeCheckout.addEventListener('click', closeCheckoutModal);
-        checkoutOverlay.addEventListener('click', (e) => {
-            if (e.target === checkoutOverlay) {
-                closeCheckoutModal();
-            }
-        });
-
+        checkoutOverlay.addEventListener('click', (e) => { if (e.target === checkoutOverlay) { closeCheckoutModal(); } });
         placeOrderBtn.addEventListener('click', () => {
             checkoutContent.style.display = 'none';
             checkoutSuccess.classList.add('show');
-
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
-            const allCartItems = cartItemsContainer.querySelectorAll('.cart-item');
-            allCartItems.forEach(item => {
+            document.querySelectorAll('#cartItemsContainer .cart-item').forEach(item => {
                 item.style.display = 'none';
                 item.style.opacity = '0';
                 item.style.maxHeight = '0';
@@ -2570,7 +3438,6 @@ img {
             });
             updateCartUI();
         });
-
         continueShoppingBtn.addEventListener('click', () => {
             closeCheckoutModal();
             setTimeout(() => {
@@ -2579,13 +3446,8 @@ img {
             }, 400);
         });
 
-        // ── Scroll Reveal Animation ──
         const revealElements = document.querySelectorAll('.reveal');
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -50px 0px',
-            threshold: 0.08
-        };
+        const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.08 };
         const revealCallback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2597,30 +3459,21 @@ img {
         const observer = new IntersectionObserver(revealCallback, observerOptions);
         revealElements.forEach(el => observer.observe(el));
 
-        // ── Navbar Shadow on Scroll ──
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
+            if (window.scrollY > 50) { navbar.classList.add('scrolled'); } else {
                 navbar.classList.remove('scrolled');
             }
         });
 
-        // ── Back to Top Button ──
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 600) {
-                backToTop.classList.add('show');
-            } else {
+            if (window.scrollY > 600) { backToTop.classList.add('show'); } else {
                 backToTop.classList.remove('show');
             }
         });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        // ── Smooth scroll for all anchor links ──
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2631,47 +3484,35 @@ img {
             });
         });
 
-        // ── Add to Cart Click ──
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', function () {
                 const productName = this.closest('.product-info').querySelector('h3').textContent;
                 const priceCurrentEl = this.closest('.product-info').querySelector('.price-current');
                 const priceText = priceCurrentEl ? priceCurrentEl.textContent : '$0';
                 const priceNum = parseFloat(priceText.replace(/[$,]/g, '')) || 0;
-
                 this.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
                 this.style.background = '#2e7d32';
                 setTimeout(() => {
                     this.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Add to Cart';
                     this.style.background = '';
                 }, 1800);
-
                 const cartItemsContainer = document.getElementById('cartItemsContainer');
                 const newCartItem = document.createElement('div');
                 newCartItem.classList.add('cart-item');
                 newCartItem.setAttribute('data-price', priceNum);
-                newCartItem.innerHTML = `
-                    <div class="cart-item-img"><i class="fa-regular fa-clock"></i></div>
-                    <div class="cart-item-info">
-                        <h5>${productName}</h5>
-                        <p>${priceText}</p>
-                    </div>
-                    <button class="cart-item-remove" aria-label="Remove item"><i class="fa-solid fa-xmark"></i></button>
-                `;
+                newCartItem.innerHTML =
+                    '<div class="cart-item-img"><i class="fa-regular fa-clock"></i></div><div class="cart-item-info"><h5>' +
+                    productName + '</h5><p>' + priceText +
+                    '</p></div><button class="cart-item-remove" aria-label="Remove item"><i class="fa-solid fa-xmark"></i></button>';
                 cartItemsContainer.appendChild(newCartItem);
-
                 attachCartRemoveHandlers();
                 updateCartUI();
-
                 const cartIcon = document.getElementById('cartToggle');
                 cartIcon.style.transform = 'scale(1.3)';
-                setTimeout(() => {
-                    cartIcon.style.transform = '';
-                }, 300);
+                setTimeout(() => { cartIcon.style.transform = ''; }, 300);
             });
         });
 
-        // ── Wishlist Click ──
         document.querySelectorAll('.wishlist-btn').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2693,9 +3534,68 @@ img {
             });
         });
 
+        // ── Signature Slider Arrow Navigation ──
+        const sigSlider = document.getElementById('signatureSlider');
+        const sigPrev = document.getElementById('sigPrev');
+        const sigNext = document.getElementById('sigNext');
+
+        function getSigScrollAmount() {
+            const card = sigSlider.querySelector('.signature-card');
+            if (!card) return 300;
+            const cardWidth = card.offsetWidth;
+            const gap = parseFloat(getComputedStyle(sigSlider).gap) || 20;
+            return cardWidth + gap;
+        }
+
+        sigPrev.addEventListener('click', () => {
+            sigSlider.scrollBy({ left: -getSigScrollAmount(), behavior: 'smooth' });
+        });
+        sigNext.addEventListener('click', () => {
+            sigSlider.scrollBy({ left: getSigScrollAmount(), behavior: 'smooth' });
+        });
+
+        // Auto-slide for signature slider
+        let sigAutoSlide = setInterval(() => {
+            const maxScroll = sigSlider.scrollWidth - sigSlider.clientWidth;
+            if (sigSlider.scrollLeft >= maxScroll - 5) {
+                sigSlider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                sigSlider.scrollBy({ left: getSigScrollAmount(), behavior: 'smooth' });
+            }
+        }, 4000);
+
+        sigSlider.addEventListener('mouseenter', () => { clearInterval(sigAutoSlide); });
+        sigSlider.addEventListener('mouseleave', () => {
+            sigAutoSlide = setInterval(() => {
+                const maxScroll = sigSlider.scrollWidth - sigSlider.clientWidth;
+                if (sigSlider.scrollLeft >= maxScroll - 5) {
+                    sigSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    sigSlider.scrollBy({ left: getSigScrollAmount(), behavior: 'smooth' });
+                }
+            }, 4000);
+        });
+
+        // Touch/drag handling for sliders keeps autoplay paused during interaction
+        const allSliders = document.querySelectorAll('.signature-slider, .collection-scroll, .confidence-scroll');
+        allSliders.forEach(slider => {
+            slider.addEventListener('touchstart', () => { clearInterval(sigAutoSlide); }, { passive: true });
+            slider.addEventListener('touchend', () => {
+                sigAutoSlide = setInterval(() => {
+                    const maxScroll = sigSlider.scrollWidth - sigSlider.clientWidth;
+                    if (sigSlider.scrollLeft >= maxScroll - 5) {
+                        sigSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        sigSlider.scrollBy({ left: getSigScrollAmount(), behavior: 'smooth' });
+                    }
+                }, 4000);
+            });
+        });
+
         console.log('👑 TRX Royal Watches — Premium Luxury Collection Ready');
-        console.log('🎥 Hero video background & new Most Popular section active');
-        console.log('📹 Video showcase section added – replace placeholder links');
+        console.log('✅ All sections updated: Signature Slider, Compact Brands, Confidence with Images, Collection Sliders (no scrollbar), Vertical Blog Slider');
+        console.log('🖼️ TRX Logo updated with custom image');
+        console.log('💬 WhatsApp floating button active');
     </script>
 </body>
 
