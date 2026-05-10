@@ -1288,8 +1288,10 @@
         .confidence-card .conf-img {
             width: 100%;
             aspect-ratio: 1.4/1;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
+            background: #f8f8f8;
+            padding: 12px;
         }
 
         .confidence-card .conf-body {
@@ -1372,35 +1374,48 @@
             cursor: grabbing;
         }
 
-        .collection-scroll .coll-card {
-            flex: 0 0 auto;
-            width: 220px;
-            scroll-snap-align: start;
-            border-radius: var(--radius);
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-xs);
-            transition: var(--transition);
-            cursor: pointer;
-        }
+        .collection-scroll .coll-card{
+    flex:0 0 auto;
+    width:220px;
+    height:320px;
+    scroll-snap-align:start;
+    border-radius:22px;
+    overflow:hidden;
+    background:#ffffff;
+    border:1px solid #efefef;
+    box-shadow:0 4px 18px rgba(0,0,0,0.04);
+    transition:0.4s ease;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
         .collection-scroll .coll-card:hover {
             box-shadow: var(--shadow-lg);
             transform: translateY(-5px);
         }
 
-        .collection-scroll .coll-card img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            display: block;
-            transition: var(--transition);
-        }
+        .collection-scroll .coll-card img{
+    width:100%;
+    height:100%;
 
-        .collection-scroll .coll-card:hover img {
-            transform: scale(1.04);
-        }
+    object-fit:contain;
+    object-position:center;
+
+    padding:18px;
+
+    background:#ffffff;
+
+    display:block;
+
+    transition:0.4s ease;
+}
+
+.collection-scroll .coll-card:hover img{
+    transform:scale(1.03);
+}
 
         @media (max-width: 768px) {
             .collection-scroll .coll-card {
@@ -2565,6 +2580,62 @@
                 right: 0;
             }
         }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .pay-card {
+            width: 70px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.35s ease;
+        }
+
+        .pay-card:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .pay-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(1);
+            transition: 0.35s ease;
+        }
+
+        /* MOBILE RESPONSIVE */
+
+        @media(max-width:768px) {
+
+            .payment-icons {
+                gap: 10px;
+            }
+
+            .pay-card {
+                width: 62px;
+                height: 42px;
+                padding: 6px;
+                border-radius: 10px;
+            }
+
+            .collection-scroll .coll-card{
+        width:170px;
+        height:250px;
+    }
+
+    .collection-scroll .coll-card img{
+        padding:12px;
+    }
+
+        }
     </style>
 </head>
 
@@ -3051,7 +3122,7 @@
             <div class="section-divider"></div>
             <p class="section-subtitle reveal">Royal Oak &amp; Beyond</p>
             <div class="collection-scroll">
-                <div class="coll-card reveal"><img src="https://i.postimg.cc/cHn7hkK2/52.avif" alt="AP" loading="lazy">
+                <div class="coll-card reveal"><img src="https://i.postimg.cc/xTWBbNz5/2222.webp" alt="AP" loading="lazy">
                 </div>
                 <div class="coll-card reveal"><img src="https://i.postimg.cc/ZYLvmhhy/53.webp" alt="AP" loading="lazy">
                 </div>
@@ -3273,11 +3344,27 @@
                 </div>
             </div>
             <div class="payment-icons">
-                <span class="pay-badge">American Express</span>
-                <span class="pay-badge">Apple Pay</span>
-                <span class="pay-badge">Google Pay</span>
-                <span class="pay-badge">Visa</span>
-                <span class="pay-badge">Mastercard</span>
+
+                <div class="pay-card">
+                    <img src="https://i.postimg.cc/nrG0WMLS/american-express-svgrepo-com.jpg" alt="American Express">
+                </div>
+
+                <div class="pay-card">
+                    <img src="https://i.postimg.cc/Y0zbPjSs/apple-pay-svgrepo-com.jpg" alt="Apple Pay">
+                </div>
+
+                <div class="pay-card">
+                    <img src="https://i.postimg.cc/tJN2c7gr/google-pay-svgrepo-com.jpg" alt="Google Pay">
+                </div>
+
+                <div class="pay-card">
+                    <img src="https://i.postimg.cc/Y0zbPjSd/visa-classic-svgrepo-com.jpg" alt="Visa">
+                </div>
+
+                <div class="pay-card">
+                    <img src="https://i.postimg.cc/Hn9BNjLB/mastercard-svgrepo-com.jpg" alt="Mastercard">
+                </div>
+
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 TRX Royal Watches. All Rights Reserved. | Luxury Watches &amp; Accessories</p>
